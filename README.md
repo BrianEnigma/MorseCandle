@@ -20,14 +20,16 @@ TODO
 
 ##Design - Software
 
-TODO
+The PWM pin that the LED is wired to lets you output pseudo-analog in 255 steps.  That means you get 256 levels of brightness (from full-off to full-on).  It might be my imagination, but it feels like variances of the same amount at lower dimness are much more drastic than ones at higher brightnesses.  Specifically, the difference between 64 and 74 feels bigger than the difference between 230 and 240.
+
+The software has two magnitudes of flicker.  There is a localized flicker that gives ambiance and a global flicker that provides the dots and dashes.  The localized flicker in the dim mode is between 30..50.  The localized flickr in the bright mode (a dot or dash) is 100..200.  The timing of the local flicker is between 10..100ms.  The timing of the global flicker, of course, is determined by whether a dot or dash is conveyed.  At the time of writing, the dot duration is 500ms (half a second) and the dash duration is 1500ms (1.5s).  The inter-symbol, inter-character and inter-word durations are also defined in the code.  Have a look for the specifics.
 
 ##Parts
 
 * [Teensy 3.0](http://www.pjrc.com/store/teensy3.html)
 * [4 AA battery holder with 9V clip](http://www.radioshack.com/product/index.jsp?productId=2062239)
 * [9V battery clip](http://www.radioshack.com/product/index.jsp?productId=2062218)
-* [2-inch mailing tube](http://www.tapplastics.com/product/plastics/plastic_rods_tubes_shapes/tube_pak/274), cut to 5 inches
+* [2-inch-diameter mailing tube](http://www.tapplastics.com/product/plastics/plastic_rods_tubes_shapes/tube_pak/274), cut to 5 inches
 * 5 inch paper diffuser (see ./Paper Diffuser/diffuser.pdf).  I printed mine on cream-colored paper, but regular white paper or cardstock probably work fine.
 * [220Ω resistor](http://www.radioshack.com/product/index.jsp?productId=2062340)
 * yellow LED

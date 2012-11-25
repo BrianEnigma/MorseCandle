@@ -16,7 +16,7 @@ This, of course, drove me to design my own electric candle with intentional flic
 
 TODO
 
-![Schematic](./Schematics/Morse%20Candle%20Schematic.png)
+<p style=“text-align:center”><img src=“https://raw.github.com/BrianEnigma/MorseCandle/master/Schematics/Morse%20Candle%20Schematic.png” width=“400px” /></p>
 
 ##Design - Software
 

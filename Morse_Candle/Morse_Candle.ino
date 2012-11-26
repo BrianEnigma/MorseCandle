@@ -15,8 +15,9 @@ const int DIGITAL_PIN = 13;
 
 #define DOT_DURATION               500
 #define DASH_DURATION             (DOT_DURATION * 3)
-#define CHARACTER_BREAK_DURATION   DOT_DURATION
-#define WORD_BREAK_DURATION       (DOT_DURATION * 5)
+#define PIP_BREAK_DURATION         DOT_DURATION
+#define CHARACTER_BREAK_DURATION   DOT_DURATION * 4
+#define WORD_BREAK_DURATION       (DOT_DURATION * 6)
 
 #define ANALOG_LOW_VARIANCE    20
 #define ANALOG_LOW             (50 - ANALOG_LOW_VARIANCE)
@@ -26,6 +27,7 @@ const int DIGITAL_PIN = 13;
 void tapCharacter(char c);
 void tapString(const char *s);
 void space(int duration);
+void pip(int duration);
 
 // Lookup table for all 26 letters.  Upper 5 bits are the pulses
 // to send (MSB first), and the lower 3 bits are the number of
@@ -75,8 +77,10 @@ void loop()
 {
     while (1) 
     {
-        tapString("PUZZLED PINT");
         space(WORD_BREAK_DURATION);
+        pip(WORD_BREAK_DURATION);
+        space(WORD_BREAK_DURATION);
+        tapString("PUZZLED PINT");
     }
 }
 
@@ -172,7 +176,7 @@ void tapCharacter(char c)
         } else {
             dot();
         }
-        space(CHARACTER_BREAK_DURATION);
+        space(PIP_BREAK_DURATION);
         code = code << 1;
     }
 #ifdef DEBUG_SERIAL  

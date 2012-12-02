@@ -7,17 +7,18 @@
  *
  * If you like this project, you may also be interested in Puzzled Pint <http://puzzledpint.com/>.
  */
-const int ANALOG_PIN = 10;
+const int ANALOG_PIN = 9;
 const int DIGITAL_PIN = 13;
 
-//#define DEBUG_SERIAL
-//#define ALSO_DIGITAL
+//#define DEBUG_SERIAL      // output characters over the USB/Serial port
+//#define ALSO_DIGITAL      // also blink dots/dashes to the on-board green LED
 
-#define DOT_DURATION               500
-#define DASH_DURATION             (DOT_DURATION * 3)
-#define PIP_BREAK_DURATION         DOT_DURATION
-#define CHARACTER_BREAK_DURATION   DOT_DURATION * 4
-#define WORD_BREAK_DURATION       (DOT_DURATION * 6)
+#define DOT_DURATION               500                  // 0.5s
+#define DASH_DURATION             (DOT_DURATION * 3)    // 1.5s
+#define PIP_BREAK_DURATION         DOT_DURATION         // 0.5s
+#define CHARACTER_BREAK_DURATION  (DOT_DURATION * 4)    // 2s
+#define WORD_BREAK_DURATION       (DOT_DURATION * 6)    // 3s
+#define MESSAGE_BREAK_DURATION    (10 * 1000)           // 10s
 
 #define ANALOG_LOW_VARIANCE    20
 #define ANALOG_LOW             (50 - ANALOG_LOW_VARIANCE)
@@ -75,11 +76,16 @@ void setup()
 
 void loop() 
 {
+    // Identify that we're online, test the peripherals @ boot
+    digitalWrite(DIGITAL_PIN, HIGH);
+    analogWrite(ANALOG_PIN, 255);
+    delay(1000);
+    digitalWrite(DIGITAL_PIN, LOW);
+    analogWrite(ANALOG_PIN, 0);
+    // Run the program
     while (1) 
     {
-        space(WORD_BREAK_DURATION);
-        pip(WORD_BREAK_DURATION);
-        space(WORD_BREAK_DURATION);
+        space(MESSAGE_BREAK_DURATION);
         tapString("PUZZLED PINT");
     }
 }
